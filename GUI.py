@@ -49,3 +49,8 @@ class Box:
     # Set value
     def set(self, val):
         self.value = val
+
+
+if __name__ == '__main__':
+    window = pygame.display.set_mode((540, 600))
+    pygame.display.set_caption('Sudoku')
