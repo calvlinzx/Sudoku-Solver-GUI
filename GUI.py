@@ -1,2 +1,4 @@
 import time
-import tkinter
+import pygame
+
+def oygame()
