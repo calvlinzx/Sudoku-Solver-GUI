@@ -50,7 +50,28 @@ class Box:
     def set(self, val):
         self.value = val
 
+    # Draw a tmp value on a certain box
+    def draw(self, win):
+        """
+        param: window of the application
+        """
+        font = pygame.font.SysFont('comicsans', 40)
+        gap = self.width / 9
+        x = self.col * gap
+        y = self.row * gap
 
-if __name__ == '__main__':
+        # if current box has tmp value but no final value
+        if self.tmp != 0 and self.value == 0:
+            text = font.render(str(self.tmp), True, (128,128,128))
+            win.blit(text, (x+5, y+5))
+        elif self.value != 0:   # final value has been entered
+            text = font.render(str(self.value), True, (0, 0, 0))
+            win.blit(text, (x + gap/2 - text.get_width()/2, y + gap/2 - text.get_height()/2))
+
+        # if current box is selected, it has red rectangle surrounded
+        if self.selected:
+            pygame.draw.rect(win, (255, 0, 0), (x, y, gap, gap), 3)
+
+def main():
     window = pygame.display.set_mode((540, 600))
     pygame.display.set_caption('Sudoku')
