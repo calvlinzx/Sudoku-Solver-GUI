@@ -34,11 +34,11 @@ class Box:
         """
         font = pygame.font.SysFont('comicsans', 40)
 
-        gap = self.width / 9  # get width/height of each box
-        x = self.col * gap  # get current column
-        y = self.row * gap  # get current row
+        gap = self.width / 9    # get width/height of each box
+        x = self.col * gap      # get current column
+        y = self.row * gap      # get current row
 
-        if self.tmp != 0 and self.value == 0:  # if current box has tmp value but no final value
+        if self.tmp != 0 and self.value == 0:       # if current box has tmp value but no final value
             text = font.render(str(self.tmp), True, (128, 128, 128))  # render gray text of tmp value
             win.blit(text, (x + 5, y + 5))  # blit the text on top-left of current box
         elif self.value != 0:  # final value has been entered
