@@ -20,6 +20,7 @@ def main():
     window = pygame.display.set_mode((540, 600))
     pygame.display.set_caption('Sudoku')
     grid = Grid(9, 9, 540, 540)
+    grid.draw(window)
     key = None
     run = True
     start = time.time()
