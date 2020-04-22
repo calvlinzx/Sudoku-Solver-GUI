@@ -72,6 +72,27 @@ class Grid:
             for j in range(self.cols):
                 self.boxes[i][j].draw(win)
 
+    # clear a selected box
+    def clear(self):
+        row, col = self.selected
+        if self.boxes[row][col].get_value() == 0:
+            self.boxes[row][col].set_tmp(0)
+
+    # click a box
+    def click(self, pos):
+        """
+        :param tuple (x, y)
+        :return tuple (row, col)
+        """
+        x, y = pos[0], pos[1]
+
+        if x < self.width and y < self.height:
+            gap = self.width / 9
+            row, col = x // gap, y // gap
+            return int(row), int(col)
+        else:
+            return None
+
 
 def main():
     window = pygame.display.set_mode((540, 600))
