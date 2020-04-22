@@ -1,4 +1,4 @@
-from solver import valid
+from solver import valid, solve
 from box import *
 
 
@@ -25,6 +25,9 @@ class Grid:
         self.model = None
         self.selected = None
 
+    def get_selected(self):
+        return self.selected
+
     # update model
     def update_model(self):
         self.model = [[self.boxes[i][j].get_value() for j in range(self.cols)] for i in range(self.rows)]
@@ -37,7 +40,7 @@ class Grid:
             self.boxes[row][col].set_value(val)  # set box value to val
             self.update_model()  # update model
 
-            if valid(self.model, val, (row, col)):  # if value is valid for box
+            if valid(self.model, val, (row, col)) and solve(self.model):  # if value is valid for box and solved
                 return True
             else:
                 self.boxes[row][col].set_value(0)  # set value back to 0
@@ -49,6 +52,15 @@ class Grid:
     def place_tmp(self, tmp):
         row, col = self.selected  # get row and col of selected box
         self.boxes[row][col].set_tmp(tmp)  # set tmp value to tmp
+
+    # select a box with row and col
+    def select(self, row, col):
+        for i in range(self.rows):
+            for j in range(self.cols):
+                self.boxes[i][j].selected = False
+
+        self.boxes[row][col].selected = True
+        self.selected = (row, col)
 
     # draw grid to a window
     def draw(self, win):
