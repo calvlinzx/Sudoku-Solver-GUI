@@ -1,4 +1,3 @@
-"""
 board = [
     [7, 8, 0, 4, 0, 0, 1, 2, 0],
     [6, 0, 0, 0, 7, 5, 0, 0, 9],
@@ -10,7 +9,7 @@ board = [
     [1, 2, 0, 0, 0, 7, 4, 0, 0],
     [0, 4, 9, 2, 0, 6, 0, 0, 7]
 ]
-"""
+
 
 from typing import List
 
@@ -95,7 +94,7 @@ def solve(board: List[List[int]]) -> bool:
     return False
 
 
-# visualize(board)
-# print("\nSolving Sudoku...\n")
-# solve(board)
-# visualize(board)
+visualize(board)
+print("\nSolving Sudoku...\n")
+solve(board)
+visualize(board)

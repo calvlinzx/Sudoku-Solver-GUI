@@ -40,7 +40,7 @@ class Grid:
             self.boxes[row][col].set_value(val)  # set box value to val
             self.update_model()  # update model
 
-            if valid(self.model, val, (row, col)) and solve(self.model):  # if value is valid for box and solved
+            if valid(self.model, val, (row, col)) or solve(self.model):  # if value is valid for box and solved
                 return True
             else:
                 self.boxes[row][col].set_value(0)  # set value back to 0
@@ -66,8 +66,8 @@ class Grid:
     def draw(self, win):
         gap = self.width / 9
 
-        for i in range(1, self.rows + 1):
-            if i % 3 == 0 and i != 0:
+        for i in range(self.rows + 1):
+            if i % 3 == 0: #and i != 0:
                 thickness = 4
             else:
                 thickness = 1
@@ -89,14 +89,14 @@ class Grid:
     # click a box
     def click(self, pos):
         """
-        :param tuple (x, y)
+        :param pos (x, y)
         :return tuple (row, col)
         """
         x, y = pos[0], pos[1]
 
         if x < self.width and y < self.height:
             gap = self.width / 9
-            row, col = x // gap, y // gap
+            row, col = y // gap, x // gap
             return int(row), int(col)
         else:
             return None

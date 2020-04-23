@@ -1,6 +1,4 @@
 import time
-import pygame
-from box import *
 from grid import *
 
 pygame.font.init()
@@ -10,7 +8,7 @@ def redraw_window(win, grid, timestamp, strikes):
     win.fill((255, 255, 255))
     # Draw time
     fnt = pygame.font.SysFont("comicsans", 40)
-    text = fnt.render("Time: " + format_time(time), 1, (0, 0, 0))
+    text = fnt.render("Time: " + format_time(timestamp), 1, (0, 0, 0))
     win.blit(text, (540 - 160, 560))
     # Draw Strikes
     text = fnt.render("X " * strikes, 1, (255, 0, 0))
@@ -82,8 +80,13 @@ def main():
                 pos = pygame.mouse.get_pos()
                 clicked = grid.click(pos)
                 if clicked:
-                    grid.select(pos[0], pos[1])
+                    grid.select(clicked[0], clicked[1])
                     key = None
+        if grid.selected and key is not None:
+            grid.place_tmp(key)
+
+        redraw_window(window, grid, play_time, strikes)
+        pygame.display.update()
 
 
 main()
